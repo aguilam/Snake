@@ -1,4 +1,4 @@
-export const GameConfig = {
+const GameConfig = {
   FieldSize: {
     rowCount: 10,
     colCount: 10
@@ -18,14 +18,40 @@ export const GameConfig = {
     borderColor: 'yellow'   
   }
 }
-
-const myPlayGround = new PlayGround();
-
-function main() {
-  const engine = new Engine();
-  engine.FieldInitializeation();
-  engine.run();
+function addEventListeners() {
+  window.addEventListener('keydown', handleKeyDown.bind(this));
 }
-
+var snakeDirection;
+function handleKeyDown(event) {
+  switch (event.key) {
+    case 'ArrowUp':
+      snakeDirection = 'up';
+    break;
+    case 'ArrowDown':
+      snakeDirection = 'down';
+    break;
+    case 'ArrowLeft':
+      snakeDirection = 'left';
+    break;
+    case 'ArrowRight':
+      snakeDirection = 'right';
+    break;
+    default:
+    break;
+  }
+}
+const engine = new Engine();
+const playGround = new PlayGround();
+const snake = new Snake();
+function tickMethods(){
+  playGround.draw(snake.body)
+  snake.move(GameConfig.FieldSize.colCount, snakeDirection)
+}
+function main() {
+  playGround.fieldDraw();
+  engine.run(tickMethods);
+}
+addEventListeners();
 main();
+
 

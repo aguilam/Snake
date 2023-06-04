@@ -1,22 +1,22 @@
 class Engine {
   constructor() {
-    this.PlayGround = myPlayGround;
-    this.Food = false;
-  }
-  FieldInitializeation() {
-    this.PlayGround.FieldDraw();
+    this.timestamp = performance.now();
   }
 
-  tick() {
-    console.log('Работает')
-    if (this.Food == false) {
-      console.log('Еда создана')
-      this.Food = true
+  tick(methods) {
+    const currentTime = performance.now();
+    const elapsedTime = currentTime - this.timestamp;
+    console.log('Работает1');
+    if (elapsedTime >= 3000) {
+      methods();
+      console.log('checkup');
+      this.timestamp = currentTime;
     }
-    requestAnimationFrame(() => this.tick());
+
+    requestAnimationFrame(() => this.tick(methods));
   }
 
-  run() {
-    requestAnimationFrame(() => this.tick());
+  run(methods) {
+    requestAnimationFrame(() => this.tick(methods));
   }
 }

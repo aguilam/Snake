@@ -1,20 +1,31 @@
-import { GameConfig } from './Main.js';
 class PlayGround{
   constructor() {
     this.playGroundConfig = GameConfig;
   }
-  FieldDraw(){
-    this.FieldContainerCreate()
-    this.CellsCreate()
+  draw(drawArray){
+    const cells = document.querySelectorAll('[number]');
+    for (var i = 0; i < cells.length; i++) {
+      var cell = cells[i];
+      var number = parseInt(cell.getAttribute('number'));
+      if (drawArray.includes(number)) {
+        cell.style.background = 'green';
+      } else {
+        this.cellsCustomization(cell);
+      }
+    }
   }
-  FieldContainerCreate(){
+  fieldDraw(){
+    this.fieldContainerCreate()
+    this.cellsCreate()
+  }
+  fieldContainerCreate(){
     let container = document.getElementById('GameContainer');
     const FieldContainer = document.createElement('div');
-    this.FieldContainerCustomization(FieldContainer)
+    this.fieldContainerCustomization(FieldContainer)
     FieldContainer.setAttribute('id', 'FieldContainer');
     container.appendChild(FieldContainer);
   }
-  FieldContainerCustomization(FieldContainer){
+  fieldContainerCustomization(FieldContainer){
     FieldContainer.style.width = `${this.playGroundConfig.FieldConfig.width}px`;
     FieldContainer.style.height = `${this.playGroundConfig.FieldConfig.height}px`;
     FieldContainer.style.background = `${this.playGroundConfig.FieldConfig.background}`;
@@ -22,19 +33,18 @@ class PlayGround{
     FieldContainer.style.display = 'grid'
     FieldContainer.style.gridTemplateColumns = `repeat(${this.playGroundConfig.FieldSize.colCount}, 1fr)`;
   }
-  CellsCreate(){
+  cellsCreate(){
     for (let index = 0; index < (this.playGroundConfig.FieldSize.rowCount * this.playGroundConfig.FieldSize.colCount); index++) {
       const cell = document.createElement('div');
-      this.CellsCustomization(cell);
+      this.cellsCustomization(cell);
       cell.setAttribute('number', index);
       FieldContainer.appendChild(cell);
     }
   }
-  CellsCustomization(cell){
+  cellsCustomization(cell){
     cell.style.width = `${this.playGroundConfig.CellsConfig.width}px`;
     cell.style.height = `${this.playGroundConfig.CellsConfig.height}px`;
     cell.style.background = `${this.playGroundConfig.CellsConfig.background}`;
     cell.style.border = `${this.playGroundConfig.CellsConfig.borderWidth} solid ${this.playGroundConfig.CellsConfig.borderColor}`;
   }
-  
 }
