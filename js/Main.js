@@ -37,8 +37,8 @@ function handleKeyDown(event) {
       snakeDirection = 'right';
     break;
     default:
-    break;
-  }
+      break;
+    }
 }
 const engine = new Engine();
 const playGround = new PlayGround();
