@@ -21,7 +21,7 @@ const GameConfig = {
 function addEventListeners() {
   window.addEventListener('keydown', handleKeyDown.bind(this));
 }
-var snakeDirection;
+let snakeDirection = 'right';
 function handleKeyDown(event) {
   switch (event.key) {
     case 'ArrowUp':
@@ -44,11 +44,12 @@ const engine = new Engine();
 const playGround = new PlayGround();
 const snake = new Snake();
 function tickMethods(){
-  playGround.draw(snake.body)
   snake.move(GameConfig.FieldSize.colCount, snakeDirection)
+  playGround.draw(snake.body)
 }
 function main() {
   playGround.fieldDraw();
+  playGround.draw(snake.body)
   engine.run(tickMethods);
 }
 addEventListeners();

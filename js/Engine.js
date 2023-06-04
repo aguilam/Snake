@@ -7,12 +7,11 @@ class Engine {
     const currentTime = performance.now();
     const elapsedTime = currentTime - this.timestamp;
     console.log('Работает1');
-    if (elapsedTime >= 3000) {
+    if (elapsedTime >= 2000) {
       methods();
       console.log('checkup');
       this.timestamp = currentTime;
     }
-
     requestAnimationFrame(() => this.tick(methods));
   }
 
