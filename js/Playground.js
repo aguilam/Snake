@@ -8,9 +8,9 @@ class PlayGround{
       const x = parseInt(cell.getAttribute('x'));
       const y = parseInt(cell.getAttribute('y'));
       if (snake.some(coord => coord.x === x && coord.y === y)) {
-        cell.style.background = 'green';
+        cell.style.background = '#6C63FF';
       } else if (food && food.x === x && food.y === y) {
-        cell.style.background = 'red';
+        cell.style.background = '#FF5757';
       } else {
         this.cellsCustomization(cell);
       }
@@ -33,7 +33,9 @@ class PlayGround{
     FieldContainer.style.background = `${this.playGroundConfig.FieldConfig.background}`;
     FieldContainer.style.border = `${this.playGroundConfig.FieldConfig.borderWidth} solid ${this.playGroundConfig.FieldConfig.borderColor}`;
     FieldContainer.style.display = 'grid'
-    FieldContainer.style.gridTemplateColumns = `repeat(${this.playGroundConfig.FieldSize.colCount}, 1fr)`;
+    FieldContainer.style.gridTemplateColumns = `repeat(${this.playGroundConfig.FieldSize.colCount}, 1fr)`
+    FieldContainer.style.justifyItems = 'center';
+
   }
   cellsCreate(){
     for (let y = 0; y < this.playGroundConfig.FieldSize.rowCount; y++) {
